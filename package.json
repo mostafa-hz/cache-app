@@ -25,6 +25,7 @@
   },
   "_moduleAliases": {
     "@common": "dist/common",
-    "@config": "dist/config"
+    "@config": "dist/config",
+    "@modules": "dist/modules"
   }
 }

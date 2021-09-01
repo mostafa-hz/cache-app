@@ -19,6 +19,9 @@
       ],
       "@config": [
         "config"
+      ],
+      "@modules/*": [
+        "modules/*"
       ]
     }
   },
