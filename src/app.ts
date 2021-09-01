@@ -1,7 +1,7 @@
 import 'module-alias/register';
 import dotenv from 'dotenv';
 import express, {Router} from 'express';
-import {initCacheModule} from "./modules/cache/init-cache-module";
+import {initCacheModule} from "@modules/cache/init-cache-module";
 import config from "@config";
 import mongoose from 'mongoose';
 
