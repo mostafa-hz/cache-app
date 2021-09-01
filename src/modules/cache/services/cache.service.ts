@@ -2,7 +2,7 @@ import {CacheRepository} from "@modules/cache/repositories/cache.repository";
 import config from "@config";
 
 export class CacheService {
-    private static generateRandomString(): string{
+    private static generateRandomString(): string {
         return (Math.random() + 1).toString(36).substring(5);
     }
 
