@@ -11,7 +11,7 @@ export class CacheModel {
     @prop({required: true})
     value!: string;
 
-    @prop({required: true, type: Date, expires: 0})
+    @prop({required: true, type: Date, expires: 1})
     expireAt!: Date;
 
     createdAt!: Date;
