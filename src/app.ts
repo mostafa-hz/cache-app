@@ -1,13 +1,14 @@
 import 'module-alias/register';
-import express, {Request, Response} from 'express';
+import express, {Router} from 'express';
+import {initCacheModule} from "./modules/cache/init-cache-module";
 
 const app = express();
 const port = 8090; // default port to listen
+const router = Router();
 
-// define a route handler for the default home page
-app.get("/", (req: Request, res: Response) => {
-    res.send("Hello world!");
-});
+initCacheModule(router);
+
+app.use('/cache', router);
 
 // start the Express server
 app.listen(port, () => {
