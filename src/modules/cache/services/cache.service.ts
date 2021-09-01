@@ -1,5 +1,6 @@
 import {CacheRepository} from "@modules/cache/repositories/cache.repository";
 import config from "@config";
+import {Logger} from "@common/logger";
 
 export class CacheService {
     private static generateRandomString(): string {
@@ -18,13 +19,13 @@ export class CacheService {
         let doc = await CacheRepository.findByKey(key);
         const expireAt = new Date(Date.now() + config.cacheTtl);
         if (doc == null) {
-            console.log('Cache miss');
+            Logger.info('Cache miss');
             // TODO this part of code should be runs synchronized through different instances(for example by using redis-lock)
             const value = CacheService.generateRandomString();
             await CacheRepository.upsertValue(key, value, expireAt);
             doc = await CacheRepository.findByKey(key);
         } else {
-            console.log('Cache hit');
+            Logger.info('Cache hit');
             await CacheRepository.updateExpireAt(key, expireAt);
         }
         return doc.value;
@@ -34,7 +35,7 @@ export class CacheService {
         const value = CacheService.generateRandomString();
         const expireAt = new Date(Date.now() + config.cacheTtl);
         await CacheRepository.upsertValue(key, value, expireAt);
-        CacheService.handleCacheCap().catch(console.error); // don't need to await
+        CacheService.handleCacheCap().catch(Logger.error); // don't need to await
     }
 
     static async flushCache(): Promise<void> {
