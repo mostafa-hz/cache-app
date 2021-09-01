@@ -1,0 +1,22 @@
+{
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "moduleNameMapper": {
+    "^@src/(.*)$": "<rootDir>/src/$1",
+    "^@config$": "<rootDir>/src/config",
+    "^@common/(.*)$": "<rootDir>/src/common/$1",
+    "^@modules/(.*)$": "<rootDir>/src/modules/$1"
+  },
+  "rootDir": ".",
+  "testRunner": "jest-circus/runner",
+  "testEnvironment": "node",
+  "testRegex": ".spec.ts$",
+  "testTimeout": 5000,
+  "verbose": true,
+  "restoreMocks": true,
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "setupFiles": [
+    "dotenv/config"
+  ]
+}
