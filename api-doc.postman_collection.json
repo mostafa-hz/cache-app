@@ -1,0 +1,124 @@
+{
+	"info": {
+		"_postman_id": "213fa165-0b73-4d7e-a969-088f02573ac3",
+		"name": "Cache-App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Value",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/cache/keys/abc",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"cache",
+						"keys",
+						"abc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Keys",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/cache/keys",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"port": "9090",
+					"path": [
+						"cache",
+						"keys"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put Value",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/cache/keys/abc",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"port": "9090",
+					"path": [
+						"cache",
+						"keys",
+						"abc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Value",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"value\": \"hi\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/cache/keys/abc",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"cache",
+						"keys",
+						"abc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Flush",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"value\": \"hi\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/cache/keys",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"cache",
+						"keys"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
