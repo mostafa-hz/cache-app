@@ -5,6 +5,8 @@ import {initCacheModule} from "@modules/cache/init-cache-module";
 import config from "@config";
 import mongoose from 'mongoose';
 
+dotenv.config();
+
 mongoose.connect(
     config.mongodbConnection,
     {
@@ -15,7 +17,6 @@ mongoose.connect(
     }
 );
 
-dotenv.config();
 const app = express();
 const router = Router();
 
