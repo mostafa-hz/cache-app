@@ -24,6 +24,7 @@ export class CacheService {
             const value = CacheService.generateRandomString();
             await CacheRepository.upsertValue(key, value, expireAt);
             doc = await CacheRepository.findByKey(key);
+            CacheService.handleCacheCap().catch(Logger.error); // don't need to await
         } else {
             Logger.info('Cache hit');
             await CacheRepository.updateExpireAt(key, expireAt);
