@@ -1,6 +1,7 @@
 import {CacheRepository} from "@modules/cache/repositories/cache.repository";
 import config from "@config";
 import {Logger} from "@common/logger";
+import {NotFoundError} from "@common/errors/NotFoundError";
 
 export class CacheService {
     private static generateRandomString(): string {
@@ -44,7 +45,11 @@ export class CacheService {
     }
 
     static async deleteValueByKey(key: string): Promise<void> {
-        await CacheRepository.deleteByKey(key);
+        const deleted = await CacheRepository.deleteByKey(key);
+
+        if (!deleted) {
+            throw new NotFoundError();
+        }
     }
 
     // TODO Apply Pagination

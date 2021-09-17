@@ -9,8 +9,9 @@ export class CacheRepository {
         return cacheModel.findOne({key});
     }
 
-    static async deleteByKey(key: string): Promise<void> {
-        await cacheModel.deleteOne({key});
+    static async deleteByKey(key: string): Promise<boolean> {
+        const {n} = await cacheModel.deleteOne({key});
+        return n === 1;
     }
 
     static async upsertValue(
