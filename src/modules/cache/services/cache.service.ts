@@ -10,7 +10,7 @@ export class CacheService {
     /**
      * this function removes the docs with lease expire time,
      * when there is new document and the collection cap exceed
-     * */
+     */
     private static async handleCacheCap(): Promise<void> {
         await CacheRepository.skipAndDelete(config.cacheLimit, {expireAt: -1})
     }
