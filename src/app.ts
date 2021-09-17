@@ -5,6 +5,7 @@ import {initCacheModule} from "@modules/cache/init-cache-module";
 import config from "@config";
 import mongoose from 'mongoose';
 import {httpErrorHandler} from "@common/errors/http-error-handler";
+import {Logger} from "@common/logger";
 
 dotenv.config();
 
@@ -28,5 +29,5 @@ app.use(httpErrorHandler);
 
 // start the Express server
 app.listen(config.appPort, () => {
-    // console.log(`server started at http://localhost:${port}`);
+    Logger.info(`server started at http://localhost:${config.appPort}`);
 });
