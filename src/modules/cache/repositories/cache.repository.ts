@@ -73,14 +73,4 @@ export class CacheRepository {
         // FIXME drop & create collection
         await cacheModel.deleteMany({});
     }
-
-    static async skipAndDelete(
-        skip: number,
-        sort: string | any,
-    ): Promise<void> {
-        const ids = await cacheModel.find({}, {_id: 1})
-            .sort(sort)
-            .skip(skip);
-        await cacheModel.deleteMany({_id: {$in: ids}});
-    }
 }

@@ -8,14 +8,6 @@ export class CacheService {
         return (Math.random() + 1).toString(36).substring(5);
     }
 
-    /**
-     * this function removes the docs with lease expire time,
-     * when there is new document and the collection cap exceed
-     */
-    private static async handleCacheCap(): Promise<void> {
-        await CacheRepository.skipAndDelete(config.cacheLimit, {expireAt: -1})
-    }
-
     static async getValueByKey(key: string): Promise<string> {
         let doc = await CacheRepository.findByKey(key);
         const expireAt = new Date(Date.now() + config.cacheTtl);
@@ -25,7 +17,6 @@ export class CacheService {
             const value = CacheService.generateRandomString();
             await CacheRepository.upsertValue(key, value, expireAt);
             doc = await CacheRepository.findByKey(key);
-            CacheService.handleCacheCap().catch(Logger.error); // don't need to await
         } else {
             Logger.info('Cache hit');
             await CacheRepository.updateExpireAt(key, expireAt);
@@ -37,7 +28,6 @@ export class CacheService {
         const value = CacheService.generateRandomString();
         const expireAt = new Date(Date.now() + config.cacheTtl);
         await CacheRepository.upsertValue(key, value, expireAt);
-        CacheService.handleCacheCap().catch(Logger.error); // don't need to await
     }
 
     static async flushCache(): Promise<void> {
