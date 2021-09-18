@@ -19,7 +19,8 @@ export class CacheService {
             doc = await CacheRepository.findByKey(key);
         } else {
             Logger.info('Cache hit');
-            await CacheRepository.updateExpireAt(key, expireAt);
+            const {value} = doc;
+            await CacheRepository.upsertValue(key, value, expireAt);
         }
         return doc.value;
     }
