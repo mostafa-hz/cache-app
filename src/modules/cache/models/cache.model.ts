@@ -1,18 +1,31 @@
 import {Types} from "mongoose";
-import {getModelForClass, modelOptions, prop} from "@typegoose/typegoose";
+import {getModelForClass, index, modelOptions, prop} from "@typegoose/typegoose";
+import config from "@config";
 
-@modelOptions({schemaOptions: {timestamps: true}})
+@modelOptions({
+    schemaOptions: {
+        timestamps: true,
+        capped: {
+            max: config.cacheLimit,
+            size: 1024 * 128,
+        },
+    },
+})
+@index({key: 1, deleted: 1})
 export class CacheModel {
     _id!: Types.ObjectId;
 
-    @prop({required: true, unique: true})
+    @prop({required: true, index: true})
     key!: string;
 
     @prop({required: true})
     value!: string;
 
-    @prop({required: true, type: Date, expires: 1})
+    @prop({required: true, type: Date})
     expireAt!: Date;
+
+    @prop({required: true, default: false, index: true})
+    deleted!: boolean;
 
     createdAt!: Date;
 
