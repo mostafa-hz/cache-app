@@ -17,11 +17,12 @@ describe('Cache Service', () => {
                 value,
                 _id: Types.ObjectId(),
                 expireAt: new Date(),
+                deleted: false,
                 updatedAt: new Date(),
                 createdAt: new Date(),
             };
             const spy1 = jest.spyOn(CacheRepository, 'findByKey').mockResolvedValueOnce(doc);
-            jest.spyOn(CacheRepository, 'updateExpireAt').mockResolvedValueOnce();
+            jest.spyOn(CacheRepository, 'updateExpireAt').mockResolvedValueOnce(true);
 
             const result = await CacheService.getValueByKey(key);
             expect(spy1).toBeCalled();
@@ -36,14 +37,15 @@ describe('Cache Service', () => {
                 value,
                 _id: Types.ObjectId(),
                 expireAt: new Date(),
+                deleted: false,
                 updatedAt: new Date(),
                 createdAt: new Date(),
             };
             jest.spyOn(Math, 'random').mockReturnValue(0.4674465405198025);
-            const now =  Date.now()
+            const now =  Date.now();
             jest.spyOn(Date, 'now').mockReturnValue(now);
             const spy1 = jest.spyOn(CacheRepository, 'findByKey').mockResolvedValueOnce(null);
-            const spy2 = jest.spyOn(CacheRepository, 'upsertValue').mockResolvedValueOnce();
+            const spy2 = jest.spyOn(CacheRepository, 'upsertValue').mockResolvedValueOnce(doc);
             const spy3 = jest.spyOn(CacheRepository, 'findByKey').mockResolvedValueOnce(doc);
 
             const result = await CacheService.getValueByKey(key);
